@@ -53,11 +53,9 @@ export const Profile = ({userId}) => {
             if (response.status === 200) {
                 console.log("post image");
                 console.log(response.data);
-                if(response.data.image_path !== null){
                   localStorage.setItem('userImage', response.data.image_path);
-                }
             }
-            console.log(response.status); 
+            console.log(response.status);   
           } catch (error) {
             console.log(error.response); // Muestra la respuesta del servidor
             // Manejar errores, por ejemplo, mostrar un mensaje de error al usuario
