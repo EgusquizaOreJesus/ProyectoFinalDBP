@@ -16,9 +16,6 @@ export const HeaderComponent = ({ userId ,idName,idImage}) => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
-  if(idImage === "null"){
-    console.log("null");  
-  }
 
   useEffect(() => {
     const handleScroll = () => {

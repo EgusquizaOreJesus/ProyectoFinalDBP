@@ -53,7 +53,7 @@ const Editor = () => {
           item.type === 'text' ? (
             <p key={index} className='prev_content'>{item.content}</p>
           ) : (
-            <img key={index} src={item.content} alt={`inserted image ${index + 1}`} />
+            <img key={index} src={item.content} alt={`inserted ${index + 1}`} />
           )
         ))}
       </div>

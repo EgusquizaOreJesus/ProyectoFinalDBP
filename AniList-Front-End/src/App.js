@@ -13,7 +13,6 @@ import { FooterComponent } from './components/Footer/FooterComponent';
 import NewThread from './components/Threads/Thread/NewThread';
 import { ProfileUser } from './components/Profile/User/ProfileUser';
 import { Settings } from './components/Profile/SettingsUser/Settings';
-import Editor from './components/Threads/Thread/Editor';
 
 
 function App() {

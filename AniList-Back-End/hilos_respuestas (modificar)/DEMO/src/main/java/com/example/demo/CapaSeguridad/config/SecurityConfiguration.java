@@ -55,10 +55,8 @@ public class SecurityConfiguration {
                 new AntPathRequestMatcher("/respuestas/**"),
                 new AntPathRequestMatcher("/labels/**"),
                 new AntPathRequestMatcher("/estados/**")
-
         );
     }
-
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -76,6 +74,5 @@ public class SecurityConfiguration {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-
 }
 

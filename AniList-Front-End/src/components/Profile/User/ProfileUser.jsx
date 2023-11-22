@@ -8,7 +8,7 @@ import axios from 'axios';
 import backendUrl from '../../../ApiConfig';
 
 export const ProfileUser = ({userId}) => {
-    const { name } = useParams();
+    const { name } = useParams(); 
     const [selectedNavItem, setSelectedNavItem] = useState('overview');
 
     const [user, setUser] = useState({});

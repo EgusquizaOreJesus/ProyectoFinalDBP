@@ -227,7 +227,7 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
+    // localhost:8080/usuarios/1/profile_picture
     @GetMapping("/{usuario_id}/profile_picture")
     public ResponseEntity<byte[]> getProfilePicture(@PathVariable("usuario_id") Long usuarioId) {
         try {
