@@ -211,14 +211,15 @@ public class UsuarioController {
     }
 
     @PostMapping("/{usuarioId}/upload-picture")
-    public ResponseEntity<Usuario> uploadPicture(
+    public ResponseEntity<UsuarioDTO> uploadPicture(
             @PathVariable("usuarioId") Long usuarioId,
             @RequestParam("file") MultipartFile file,
             @RequestParam("pictureType") String pictureType
     ) {
         try {
             Usuario usuarioActualizado = usuarioService.uploadPicture(usuarioId, file, pictureType);
-            return ResponseEntity.ok(usuarioActualizado);
+            UsuarioDTO user = convertToDTO(usuarioActualizado);
+            return ResponseEntity.ok(user);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } catch (IllegalArgumentException e) {
@@ -227,7 +228,7 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-    // localhost:8080/usuarios/1/profile_picture
+
     @GetMapping("/{usuario_id}/profile_picture")
     public ResponseEntity<byte[]> getProfilePicture(@PathVariable("usuario_id") Long usuarioId) {
         try {

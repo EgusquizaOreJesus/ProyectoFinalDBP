@@ -129,7 +129,7 @@ public class RespuestaController {
         List<Respuesta> respuestasSinRespuestaPadre = respuestaRepository.findByRespuestaPadreIsNull();
         List<Respuesta> RespuestasHilo = new ArrayList<>();
         for(Respuesta respuesta: respuestasSinRespuestaPadre){
-            if(respuesta.getHilo().getId()==hiloId){
+            if(respuesta.getHilo().getId().equals(hiloId)){
                 RespuestasHilo.add(respuesta);
             }
         }

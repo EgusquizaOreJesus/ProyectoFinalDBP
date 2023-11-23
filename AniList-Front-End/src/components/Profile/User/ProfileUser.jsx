@@ -6,16 +6,16 @@ import { Overview } from './routes_profile/Overview';
 import { SocialUser } from './routes_profile/SocialUser';
 import axios from 'axios';
 import backendUrl from '../../../ApiConfig';
-
+import {useNavigate} from 'react-router-dom';
 export const ProfileUser = ({userId}) => {
-    const { name } = useParams(); 
+    const navigate = useNavigate();
+    const { name } = useParams();
     const [selectedNavItem, setSelectedNavItem] = useState('overview');
 
     const [user, setUser] = useState({});
     useEffect(() => {
       axios.get(`${backendUrl}/usuarios/buscar/${name}`)
       .then((response) => {
-        console.log(response.data);
         setUser(response.data);
       }).catch((error) => {
       console.error("Error fetching user data:", error);
@@ -37,6 +37,12 @@ export const ProfileUser = ({userId}) => {
       }, []);
     const handleNavItemClick = (navItem) => {
       setSelectedNavItem(navItem);
+      if(navItem === 'overview'){
+        navigate(`/user/${name}`);  
+      }else{
+        navigate(`/user/${name}/${navItem}`);
+      }
+      //href={`/user/${name}/social`}
       // Almacenar el estado del elemento de navegación en localStorage
       localStorage.setItem('selectedNavItem', navItem);
     };
@@ -59,27 +65,28 @@ export const ProfileUser = ({userId}) => {
 
             <div className='nav_wrap'>
                 <div className='nav_container'>
-                  <a
-                    href={`/user/${name}/`}
+                  <div
                     className={`link ${selectedNavItem === 'overview' ? 'active' : ''}`}
+                    style={{cursor: 'pointer'}}
                     onClick={() => handleNavItemClick('overview')}
                   >
                   Overview
-                  </a>
-                  <a
-                    href={`/user/${name}/favorites`}
+                  </div>
+                  <div
                     className={`link ${selectedNavItem === 'favorites' ? 'active' : ''}`}
                     onClick={() => handleNavItemClick('favorites')}
+                    style={{cursor: 'pointer'}}
                   >
                     Favorites
-                  </a>
-                  <a
-                    href={`/user/${name}/social`}
+                  </div>
+                  <div
                     className={`link ${selectedNavItem === 'social' ? 'active' : ''}`}
                     onClick={() => handleNavItemClick('social')}
+                    style={{cursor: 'pointer'}}
+
                   >
                     Social
-                  </a>
+                  </div>
                 </div>
             </div>
         </div>

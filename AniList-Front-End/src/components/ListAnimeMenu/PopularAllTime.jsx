@@ -37,8 +37,6 @@ export const PopularAllTime = () => {
               variables: variables,
             });
         
-            console.log("resultados");
-            console.log(response.data.data.Page.media); // Cambié `response.data.data.Page.media` a `response.data` ya que la respuesta completa se encuentra en `response.data`.
             setpopularAllTimeData(response.data.data.Page.media);
           } catch (error) {
             console.error('Error fetching anime data:', error);

@@ -20,8 +20,6 @@ function App() {
     const idUser = localStorage.getItem("userId");
     const idName = localStorage.getItem("userName");
     const idImage = localStorage.getItem("userImage");
-    console.log(idUser);
-    console.log(idName);
 
     return (
 <div className="App">

@@ -2,20 +2,15 @@ import React, { useEffect, useState } from 'react';
 import '../Header/styles/header.css';
 import { SearchBar } from '../barraBusqueda/SearchBar';
 import { SearchResults } from '../barraBusqueda/SearchResults';
-import { useNavigate } from 'react-router-dom';
 import backendUrl from '../../ApiConfig';
 
 export const HeaderComponent = ({ userId ,idName,idImage}) => {
-
-
-  const navigate = useNavigate();
-  
   const [results, setResults] = useState([]);
   const [clearSearch, setClearSearch] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-
+  var isUserProfileComponent = (window.location.pathname.startsWith('/user/') || window.location.pathname.startsWith('/anime/'));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,8 +20,8 @@ export const HeaderComponent = ({ userId ,idName,idImage}) => {
       setIsHeaderVisible(!isScrolledDown);
       setPrevScrollPos(currentScrollPos);
     };
-    window.addEventListener('scroll', handleScroll);
 
+    window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -41,13 +36,11 @@ export const HeaderComponent = ({ userId ,idName,idImage}) => {
     localStorage.removeItem('userImage');
     localStorage.removeItem('token');
     localStorage.removeItem('userBanner');
-    navigate('/');
-    window.location.reload();
+    window.location.href = '/';
   };
   const toogleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  const isUserProfileComponent = (window.location.pathname.startsWith('/user/') || window.location.pathname.startsWith('/anime/'));
   return (
     <div className={`encabezado  ${!isHeaderVisible ? '' : 'transition'} ${isUserProfileComponent ? 'transparent':''}` } style={{transition:'background 0.8s ease 0s, top 0.5s ease 0s'}}>
       <div className='wrap'>

@@ -6,14 +6,11 @@ import backendUrl from '../../../../ApiConfig';
 
 export const Overview = () => {
   const { name } = useParams();
-  console.log(name);
   const [showButtons, setShowButtons] = useState(false);
   const textareaRef = useRef(null);
   const [menuVisibleFilter, setMenuVisible] = useState(false);
   const [editorContent, setEditorContent] = useState(''); // Nuevo estado para el contenido del editor
   const [containerFeed, setContainerFeed] = useState([]); // Nuevo estado para el contenido del editor
-  
-  console.log(localStorage.getItem('userId'));
   const toggleMenu = () => {
     setMenuVisible(!menuVisibleFilter);
   };
@@ -21,13 +18,10 @@ export const Overview = () => {
   // ACTIVITY FEED:
   useEffect(() => {
     const fetchData = async () => {
-      console.log("useEffect");
-      console.log(name);
   
       try {
         const response = await axios.get(`${backendUrl}/estados/` + name);
         if (response.status === 200) {
-          console.log('Publicación enviada con éxito:', response.data);
           // Invertir el orden de la lista antes de establecer el estado
           const reversedData = response.data.reverse();
           setContainerFeed(reversedData);
@@ -59,7 +53,6 @@ export const Overview = () => {
   const handleTextareaInput = (e) => {
     const textarea = textareaRef.current;
     setEditorContent(e.target.value); // Actualiza el estado con el contenido del editor
-    console.log(textarea.scrollHeight);
    // Ajusta la altura del textarea dinámicamente
    textarea.style.height = 'auto'; // Restablecer la altura
     textarea.style.height = `${textarea.scrollHeight}px`;
@@ -91,10 +84,6 @@ export const Overview = () => {
         setEditorContent(newContent);
         textarea.style.height = `${textarea.scrollHeight +24}px`;
       }
-     // Ajusta la altura del textarea dinámicamente
-
-     console.log(textarea.scrollHeight);
-
     }
   };
   const extractTextAndImages = () => {
@@ -128,7 +117,6 @@ export const Overview = () => {
   };
   const textAndImages = extractTextAndImages();
   const textContentArray = textAndImages.map(item => item.content);
-  console.log(textContentArray.length);
 
   // Fetch para enviar el contenido del editor al backend
  
@@ -152,15 +140,12 @@ export const Overview = () => {
       console.error('Error al enviar la publicación:', error);
     }
     setEditorContent('');
-
+    window.location.reload();
   };
 
   const calculateTimeAgo = (createdDate) => {
     const currentDate = new Date();
-    console.log(currentDate);
     const createdDateObj = new Date(createdDate);
-    console.log("createdDateObj");
-    console.log(createdDateObj);
     const timeDifference = currentDate - createdDateObj;
     const seconds = Math.floor(timeDifference / 1000);
     const minutes = Math.floor(seconds / 60);
