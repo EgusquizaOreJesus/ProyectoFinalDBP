@@ -34,7 +34,7 @@ export const Overview = () => {
     };
   
     fetchData(); // Llamada a la función asíncrona
-  }, [name]); // Asegúrate de incluir 'name' en la lista de dependencias si lo 
+  }, [name]); 
   
   // renderComponent
   const renderContent = (user) => {

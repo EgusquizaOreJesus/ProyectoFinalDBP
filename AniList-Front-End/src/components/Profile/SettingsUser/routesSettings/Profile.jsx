@@ -71,7 +71,6 @@ export const Profile = ({userId}) => {
                 if (response.status === 200) {
                     console.log("post banner");
                     console.log(response.data);
-                      localStorage.setItem('userBanner', response.data.background_picture);
                 }
                 console.log(response.status); 
               } catch (error) {
@@ -136,8 +135,8 @@ export const Profile = ({userId}) => {
 
             <div className='container_image'>
             <div className='dropbox'>
-            <input type='file' onChange={handleImageChange} accept='image/*' className='input_file'/>
-            <p>Upload Image</p>
+              <input type='file' onChange={handleImageChange} accept='image/*' className='input_file'/>
+              <p>Upload Image</p>
             </div>
             {imageSrc && (
             <div className='prev_image'>

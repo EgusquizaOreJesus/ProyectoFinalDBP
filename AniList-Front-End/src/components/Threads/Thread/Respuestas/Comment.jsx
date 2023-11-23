@@ -5,6 +5,7 @@ import axios from 'axios';
 import backendUrl from '../../../../ApiConfig';
 
 export const Comment = ({ comment, depth = 0}) => {
+
   const [editorState, setEditorState] = useState(false);
   const [editorContent, setEditorContent] = useState(''); // Nuevo estado para el contenido del editor
   const textareaRef = useRef(null);
@@ -27,17 +28,17 @@ export const Comment = ({ comment, depth = 0}) => {
       return;
     }
 // Enviar la respuesta al backend
-axios.post(`${backendUrl}/respuestas/${userId}/${comment.hiloId}`, { contenido: editorContent, respuestaPadreId: comment.id })
-  .then((response) => {
-    // Actualizar la vista o realizar cualquier acción necesaria después de enviar la respuesta
-    console.log('Respuesta enviada con éxito:', response.data);
-    window.location.reload();
+  axios.post(`${backendUrl}/respuestas/${userId}/${comment.hiloId}`, { contenido: editorContent, respuestaPadreId: comment.id })
+    .then((response) => {
+      // Actualizar la vista o realizar cualquier acción necesaria después de enviar la respuesta
+      console.log('Respuesta enviada con éxito:', response.data);
+      window.location.reload();
 
-  })
-  .catch((error) => {
-    console.error('Error al enviar la respuesta:', error);
-  });
-};
+    })
+    .catch((error) => {
+      console.error('Error al enviar la respuesta:', error);
+    });
+  };
   const calculateTimeAgo = (createdDate) => {
     const currentDate = new Date();
     const createdDateObj = new Date(createdDate);

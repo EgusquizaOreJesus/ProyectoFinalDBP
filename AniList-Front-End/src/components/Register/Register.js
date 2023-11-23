@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import './Register.css'
 import backendUrl from '../../ApiConfig';
 export const Register = () => {
@@ -10,7 +9,6 @@ export const Register = () => {
     password: '',
   });
 
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,9 +25,8 @@ export const Register = () => {
       const response = await axios.post(`${backendUrl}/api/signup`, formData);
 
       if (response.status === 200) {
-        navigate('/'); 
+        window.location.href = '/';
       }
-      console.log(response.status); 
     } catch (error) {
       console.log(error.response); // Muestra la respuesta del servidor
       // Manejar errores, por ejemplo, mostrar un mensaje de error al usuario

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 import './styles/Login.css';
 import backendUrl from '../../ApiConfig';
@@ -12,8 +11,6 @@ export const Login = () => {
     email: '',
     password: '',
   });
-
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,14 +29,10 @@ export const Login = () => {
       const response = await axios.post(`${backendUrl}/api/signin`, formData);
 
       if (response.status === 200) {
-
-      localStorage.setItem('userId', response.data.id);
-      localStorage.setItem('userName', response.data.nickName);
-      localStorage.setItem('userImage', response.data.image_path);
-      localStorage.setItem('userBanner', response.data.background_picture);
-      console.log(response.data);  
-      navigate('/'); // Reemplaza /pagina-principal' con la URL correcta
-      window.location.reload();
+          localStorage.setItem('userId', response.data.id);
+          localStorage.setItem('userName', response.data.nickName);
+          localStorage.setItem('userImage', response.data.image_path);
+          window.location.href = '/';
       } 
     } catch (error) {
       if (error.message === "Network Error"){

@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Profile } from './routesSettings/Profile';
 import { Account } from './routesSettings/Account';
 import './styles/settings.css'
 
 export const Settings = ({userId}) => {
-    const navigate = useNavigate();
 
     const isLogged = localStorage.getItem('userId');
-    const [shouldRedirect, setShouldRedirect] = useState(false);
   
     useEffect(() => {
-      // Si el usuario no está logeado, establecer shouldRedirect en true
-      if (isLogged === null) {
-        setShouldRedirect(true);
-      }
-  
+
       // Recuperar el estado del elemento de navegación desde localStorage
       const storedNavItem = localStorage.getItem('selectedNavItem');
       if (storedNavItem) {
@@ -46,11 +40,7 @@ export const Settings = ({userId}) => {
         localStorage.setItem('selectedNavItem', navItem);
     };
       // Redirigir a la página de inicio de sesión si shouldRedirect es true
-  useEffect(() => {
-    if (shouldRedirect) {
-      navigate('/login');
-    }
-  }, [shouldRedirect, navigate]);
+
 
   return (
     <div className='page_content'>

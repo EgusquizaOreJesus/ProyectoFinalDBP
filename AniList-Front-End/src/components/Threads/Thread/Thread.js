@@ -23,30 +23,24 @@ const Thread = ({userId}) => {
     const toggleEditorState = () => {
       setEditorState(!editorState);
     };
-    
     useEffect(() => {
-      
-      axios.get(`${backendUrl}/respuestas/rootMessage/`+id)
+      axios.get(`${backendUrl}/respuestas/rootMessage/${id}`)
         .then((response) => {
           setListcomments(response.data);
         })
         .catch((error) => {
           console.error('Error al obtener los hilos:', error);
         });
+    
+      axios.get(`${backendUrl}/hilos/${id}`)
+        .then((response) => {
+          setHilos(response.data);
+          console.log("get");
+        })
+        .catch((error) => {
+          console.error('Error al obtener los hilos:', error);
+        });
     }, [id]);
-    useEffect(() => {
-
-    console.log(id);
-    // Realiza una solicitud GET para obtener la lista de hilos desde tu backend
-    axios.get(`${backendUrl}/hilos/`+id)
-      .then((response) => {
-        setHilos(response.data);
-        console.log("get");
-      })
-      .catch((error) => {
-        console.error('Error al obtener los hilos:', error);
-      });
-  }, [id]);
   const handleRespuestaSubmit = () => {
         // Verifica que el contenido del editor tenga al menos 10 caracteres
       if (editorContent.length < 10) {
@@ -119,7 +113,7 @@ const Thread = ({userId}) => {
         <h1 className='title_thread'>{hilos.tema}</h1>
         <div className='body'>
           <div className='header'>
-          <a href="/" className='user'>
+          <a href={`/user/${hilos.userNickname}`} className='user'>
                 <div className='avatar' style={{
                       backgroundImage: `url(${hilos.image_path !== null ? hilos.image_path : '../../../images/profile/profile.png'})`,
                     }}    
